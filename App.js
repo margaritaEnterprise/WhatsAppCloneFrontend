@@ -5,9 +5,11 @@ import { createSignalRContext } from "react-signalr/signalr";
 import { ScrollView} from 'react-native-web';
 import { useFonts } from 'expo-font';
 
+const apiUrl = "https://whatsappclonebackned.onrender.com/chatHub";
+
 const SignalRContext = createSignalRContext();
 
-const Comp = () => {
+const Messages = () => {
   const [messages, setMessage] = useState([]);
 
   SignalRContext.useSignalREffect(
@@ -20,7 +22,7 @@ const Comp = () => {
 
   return (
     <ScrollView>
-      {messages.map(message => <Text style={{fontFamily:'Poppins'}} >{message.user} says {message.message}</Text>)}
+      {messages.map((message, index) => <Text key={index} style={{fontFamily:'Poppins'}} >{message.user} says {message.message}</Text>)}
     </ScrollView>
   );
 };
@@ -32,7 +34,7 @@ export default function App() {
   });
 
   const [user, onChangeUser] = useState('');
-  const [text, onChangeText] = useState('Send a message');
+  const [text, onChangeText] = useState('');
 
   if(!fontsLoaded){
     return <Text>Cargando ...</Text>
@@ -41,23 +43,26 @@ export default function App() {
   return (
     <SignalRContext.Provider 
       connectEnabled={true}
-      url={"https://localhost:7144/chatHub"}
+      url={apiUrl}
     >
         <View style={styles.container}>
           <Text style={{ fontSize: 50, fontFamily:'Poppins'}}>Chats</Text>
           <StatusBar style="auto" />
-          <Comp/>
+          <Messages/>
           <TextInput
             style={styles.input}
             onChangeText={onChangeUser}
+            placeholder={'username'}
             value={user}
           />
           <TextInput
             style={styles.input}
             onChangeText={onChangeText}
             value={text}
-            onSubmitEditing={ () => {
+            placeholder={'Send a message'}
+            onSubmitEditing={ (e) => {
               SignalRContext.invoke("SendMessage", user, text).catch(err => console.error(err));
+              e.target.value = '';
             }}
           />
         </View>
