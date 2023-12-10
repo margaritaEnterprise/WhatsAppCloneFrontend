@@ -1,12 +1,11 @@
 import React, {useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { StyleSheet, Text, TextInput, View, ScrollView } from 'react-native';
 import { createSignalRContext } from "react-signalr/signalr";
-import { ScrollView} from 'react-native-web';
 import { useFonts } from 'expo-font';
+import Constants from 'expo-constants';
 
 const apiUrl = "https://whatsappclonebackned.onrender.com/chatHub";
-
 const SignalRContext = createSignalRContext();
 
 const Messages = () => {
@@ -22,7 +21,9 @@ const Messages = () => {
 
   return (
     <ScrollView>
-      {messages.map((message, index) => <Text key={index} style={{fontFamily:'Poppins'}} >{message.user} says {message.message}</Text>)}
+      <View>
+        {messages.map((message, index) => <Text key={index} style={{fontFamily:'Poppins'}} >{message.user} says {message.message}</Text>)}
+      </View>
     </ScrollView>
   );
 };
@@ -73,6 +74,7 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
+    marginTop: Constants.statusBarHeight,
     flex: 1,
     flexDirection: 'column',
     backgroundColor: '#fff',
