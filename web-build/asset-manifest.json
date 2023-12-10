@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.js": "/static/js/main.e1ca4e5c.js",
+    "static/js/354.de3367e9.js": "/static/js/354.de3367e9.js",
+    "static/media/Poppins-Regular.ttf": "/static/media/Poppins-Regular.35d26b781dc5fda684cc.ttf",
+    "favicon.ico": "/favicon.ico",
+    "index.html": "/index.html",
+    "favicon-32.png": "/favicon-32.png",
+    "favicon-16.png": "/favicon-16.png",
+    "manifest.json": "/manifest.json",
+    "serve.json": "/serve.json",
+    "main.e1ca4e5c.js.map": "/static/js/main.e1ca4e5c.js.map",
+    "354.de3367e9.js.map": "/static/js/354.de3367e9.js.map"
+  },
+  "entrypoints": [
+    "static/js/354.de3367e9.js",
+    "static/js/main.e1ca4e5c.js"
+  ]
+}
